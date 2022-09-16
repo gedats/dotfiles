@@ -71,7 +71,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
-
+plugins=(zsh-vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -108,7 +108,8 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 PYTHONPATH="/home/g/idlegame/Airtest/main"
-PATH="$HOME/.local/bin/:$HOME/.emacs.d/bin:$HOME/builds/dotfiles/unity/.local/bin/unity/:$PATH"
+GOPATH=$HOME/go
+PATH="$GOPATH/bin:/usr/lib/slack/:$HOME/.local/bin/:$HOME/.emacs.d/bin:$HOME/builds/dotfiles/unity/.local/bin/unity/:$PATH"
 DEFAULT_USER=g
 COSDIR=$HOME/idlegame
 
@@ -117,15 +118,19 @@ COSDIR=$HOME/idlegame
 alias g="git"
 alias gc="git commit -m"
 alias gca="git commit --allow-empty -m"
+alias gcl="git clean -fd"
+alias gd="git branch -D"
+alias gdo="git push origin :$1"
 alias gfo="git fetch origin"
 alias gma="git commit --allow-empty -m '/mergeAirtests' && git push"
 alias gmpa="git commit --allow-empty -m '/mergeParallelAirtests' && git push"
 alias gm="git merge"
-alias gms="git merge staging"
+alias gms="git fetch origin staging:staging && git merge origin/staging"
 alias gmd="git fetch origin develop:develop && git merge origin/develop"
 alias gra="git commit --allow-empty -m '/runAirtestAnalyzers' && git push"
 alias gpu="git push"
 alias gpl="git pull"
+alias gpln="git pull --no-ff"
 alias gco="git checkout"
 alias gcod="git checkout develop && git pull"
 alias gcos="git checkout staging && git pull"
@@ -136,9 +141,26 @@ alias grs="git restore --staged"
 alias gs="git status"
 alias sz="source ~/.zshrc"
 alias sc="adb kill-server && sudo adb start-server && scrcpy -s e80818c2"
+alias i="cd /home/g/idlegame"
+alias j="cd /home/g/jdlegame"
 # config
 alias vz="vim ~/.zshrc"
 alias v3="vim ~/.i3/config"
+# history
+alias vh="vim ~/.zsh_history"
 # dotfiles
 alias gdot="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+# swapkey
+alias swapkeys="setxkbmap -option caps:swapescape"
+# ranger
+alias ra="ranger"
+# aws sso
+alias al="aws sso login --profile 605060902952_redshift_sensitive_analytics"
+alias dg="dragon-drop -x"
+# idlegame
+alias sls="dotnet run --project ./Build/Build StartLocalServer"
+alias shs="dotnet run --project ./Build/Build StartHostServices"
+alias sp="./code_patcher_unix.sh"
 
+# bonsai
+cbonsai -p

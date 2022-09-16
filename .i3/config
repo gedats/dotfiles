@@ -70,15 +70,18 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec firefox-nightly
+bindsym $mod+Shift+F2 exec /usr/lib/slack/slack
 bindsym $mod+F3 exec pcmanfm
 bindsym $mod+F4 exec pycharm
+bindsym $mod+Ctrl+F4 exec rider
 bindsym $mod+Shift+F4 exec emacs
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+F6 exec todo
 bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym $mod+Shift+d --release exec "perl /home/g/scripts/kill-high-mem-procs.pl; exec notify-send 'killscript ran'"
 bindsym Print exec flameshots3
 bindsym Shift+Print exec dmenurecord
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
@@ -203,8 +206,8 @@ set $ws7 7
 set $ws8 8
 
 # Use workspaces on different monitors
-set $l_scr DP-1
-set $r_scr HDMI-0
+set $l_scr DisplayPort-1
+set $r_scr HDMI-A-1
 workspace "$ws1" output "$l_scr"
 workspace "$ws2" output "$r_scr"
 workspace "$ws3" output "$l_scr"
@@ -355,21 +358,23 @@ exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id ff-theme-util
 # keypress latency and repetition
-exec --no-startup-id xset r rate 250 100
+exec --no-startup-id xset r rate 150 250
 # turn off display after 5 min
-exec --no-startup-id xset s 300 300
+exec --no-startup-id xset s 900
 exec --no-startup-id redshift -l 51.7:14.7 -t 2200:1600 -m randr
 exec --no-startup-id flameshot &
 # exec --no-startup-id unclutter &
 exec --no-startup-id dockerd &
 exec --no-startup-id /usr/bin/slack
 exec --no-startup-id /usr/bin/firefox-nightly
-exec --no-startup-id /usr/bin/smartgit
+# exec --no-startup-id /usr/bin/smartgit
 exec --no-startup-id /usr/bin/unityhub
+exec --no-startup-id /usr/bin/dropbox
 exec --no-startup-id rider
 exec --no-startup-id pycharm
 exec --no-startup-id key-mapper-control --command start --device "SINOWEALTH Wired Gaming Mouse" --preset "a"
-
+exec --no-startup-id key-mapper-control --command autoload --device /dev/input/by-id/usb-SINOWEALTH_Wired_Gaming_Mouse-event-mouse
+exec --no-startup-id fcitx5 -d
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
